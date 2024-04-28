@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html style="font-size: 14px;" lang="ua"><head>
+
+    <title>Розумний будинок</title>
+    <link href="{{ url_for('static', filename='app.css') }}" rel="stylesheet">
+</head>
+    <body>
+      <div class = "center">
+          <img src="{{ url_for('static', filename='Profile_Black-2D_Floor_Plan.jpg') }}" alt="House" data-image-width="800" data-image-height="600">
+          <div class= "room-info" style="left: 925px; top: 150px">
+              <a href="/kitchen/light/toggle"><img class="small-img"
+                                                    src="{% if kitchen['light'] %}
+                                                    {{ url_for('static', filename='light-bulb-on.png') }}
+                                                    {% else %}
+                                                    {{ url_for('static', filename='light-bulb.png') }}
+                                                    {% endif %}" /></a>
+              <span>Temp: {{ kitchen['temp'] }}</span>
+              <span>Brightness: {{ kitchen['brightness'] }}</span>
+          </div>
+
+
+          <div class= "room-info" style="left: 1125px; top: 90px">
+              <a href="/bathroom/light/toggle"><img class="small-img"
+                                                    src="{% if bathroom['light'] %}
+                                                    {{ url_for('static', filename='light-bulb-on.png') }}
+                                                    {% else %}
+                                                    {{ url_for('static', filename='light-bulb.png') }}
+                                                    {% endif %}" /></a>
+
+          <span>Temp: {{ bathroom['temp'] }}</span>
+          <span>Brightness: {{ bathroom['brightness'] }}</span>
+          </div>
+          <div class= "room-info" style="left: 1250px; top: 225px">
+              <a href="/hallway/light/toggle"><img class="small-img"
+                                                    src="{% if hallway['light'] %}
+                                                    {{ url_for('static', filename='light-bulb-on.png') }}
+                                                    {% else %}
+                                                    {{ url_for('static', filename='light-bulb.png') }}
+                                                    {% endif %}" /></a>
+          <span>Temp: {{ hallway['temp'] }}</span>
+          <span>Brightness: {{ hallway['brightness'] }}</span>
+          </div>
+          <div class= "room-info" style="left: 1200px; top: 400px">
+              <a href="/bedroom/light/toggle"><img class="small-img"
+                                                    src="{% if bedroom['light'] %}
+                                                    {{ url_for('static', filename='light-bulb-on.png') }}
+                                                    {% else %}
+                                                    {{ url_for('static', filename='light-bulb.png') }}
+                                                    {% endif %}" /></a>
+          <span>Temp: {{ bedroom['temp'] }}</span>
+          <span>Brightness: {{ bedroom['brightness'] }}</span>
+          </div>
+          <div class= "room-info" style="left: 600px; top: 300px">
+              <a href="/balcony/light/toggle"><img class="small-img"
+                                                    src="{% if balcony['light'] %}
+                                                    {{ url_for('static', filename='light-bulb-on.png') }}
+                                                    {% else %}
+                                                    {{ url_for('static', filename='light-bulb.png') }}
+                                                    {% endif %}" /></a>
+          <span>Temp: {{ balcony['temp'] }}</span>
+          <span>Brightness: {{ balcony['brightness'] }}</span>
+          </div>
+
+      </div>
+    <div class="forms">
+        <form action="/kitchen/light/brightness" method="post">
+            <span>
+                <label>Kitchen brightness</label>
+                <input type="number" name="brightness"/>
+            </span>
+            <span>
+                <button type="submit">Change brightness</button>
+            </span>
+        </form>
+        <form action="/bathroom/light/brightness" method="post">
+            <span>
+                <label>Bathroom brightness</label>
+                <input type="number" name="brightness"/>
+            </span>
+            <span>
+                <button type="submit">Change brightness</button>
+            </span>
+        </form>
+        <form action="/hallway/light/brightness" method="post">
+            <span>
+                <label>Hallway brightness</label>
+                <input type="number" name="brightness"/>
+            </span>
+            <span>
+                <button type="submit">Change brightness</button>
+            </span>
+        </form>
+        <form action="/bedroom/light/brightness" method="post">
+            <span>
+                <label>Bedroom brightness</label>
+                <input type="number" name="brightness"/>
+            </span>
+            <span>
+                <button type="submit">Change brightness</button>
+            </span>
+        </form>
+        <form action="/balcony/light/brightness" method="post">
+            <span>
+                <label>Balcony brightness</label>
+                <input type="number" name="brightness"/>
+            </span>
+            <span>
+                <button type="submit">Change brightness</button>
+            </span>
+        </form>
+
+    </div>
+  
+</body>
+</html>
