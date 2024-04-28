@@ -23,12 +23,12 @@ span{
     display: flex;
     gap: 20px;
 }
-form{
+.form{
     border: solid 1px black;
     display: flex;
     flex-direction: column;
 }
-form span{
+.form span{
     margin: 5px;
     display: flex;
     flex-direction: column;

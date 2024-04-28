@@ -3,113 +3,119 @@
 
     <title>Розумний будинок</title>
     <link href="{{ url_for('static', filename='app.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script>window.jQuery || document.write('<script src="{{
+    url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
 </head>
     <body>
       <div class = "center">
           <img src="{{ url_for('static', filename='Profile_Black-2D_Floor_Plan.jpg') }}" alt="House" data-image-width="800" data-image-height="600">
           <div class= "room-info" style="left: 925px; top: 150px">
-              <a href="/kitchen/light/toggle"><img class="small-img"
-                                                    src="{% if kitchen['light'] %}
-                                                    {{ url_for('static', filename='light-bulb-on.png') }}
-                                                    {% else %}
-                                                    {{ url_for('static', filename='light-bulb.png') }}
-                                                    {% endif %}" /></a>
-              <span>Temp: {{ kitchen['temp'] }}</span>
-              <span>Brightness: {{ kitchen['brightness'] }}</span>
+              <img id = "kitchenlightimg" onclick="toggleLight('kitchen')" class="small-img"
+                   src="{% if kitchen['light'] %}
+                   {{ url_for('static', filename='light-bulb-on.png') }}
+                   {% else %}
+                   {{ url_for('static', filename='light-bulb.png') }}
+                   {% endif %}" />
+              <span class = "temp" id = "kitchenTemp">Temp: {{ kitchen['temp'] }}</span>
+              <span id = "kitchenBrightness">Brightness: {{ kitchen['brightness'] }}</span>
           </div>
 
 
           <div class= "room-info" style="left: 1125px; top: 90px">
-              <a href="/bathroom/light/toggle"><img class="small-img"
-                                                    src="{% if bathroom['light'] %}
-                                                    {{ url_for('static', filename='light-bulb-on.png') }}
-                                                    {% else %}
-                                                    {{ url_for('static', filename='light-bulb.png') }}
-                                                    {% endif %}" /></a>
+              <img id = "bathroomlightimg" onclick="toggleLight('bathroom')" class="small-img"
+                   src="{% if bathroom['light'] %}
+                   {{ url_for('static', filename='light-bulb-on.png') }}
+                   {% else %}
+                   {{ url_for('static', filename='light-bulb.png') }}
+                   {% endif %}" />
 
-          <span>Temp: {{ bathroom['temp'] }}</span>
-          <span>Brightness: {{ bathroom['brightness'] }}</span>
+          <span class = "temp" id = "bathroomTemp">Temp: {{ bathroom['temp'] }}</span>
+          <span id = "bathroomBrightness">Brightness: {{ bathroom['brightness'] }}</span>
           </div>
           <div class= "room-info" style="left: 1250px; top: 225px">
-              <a href="/hallway/light/toggle"><img class="small-img"
-                                                    src="{% if hallway['light'] %}
-                                                    {{ url_for('static', filename='light-bulb-on.png') }}
-                                                    {% else %}
-                                                    {{ url_for('static', filename='light-bulb.png') }}
-                                                    {% endif %}" /></a>
-          <span>Temp: {{ hallway['temp'] }}</span>
-          <span>Brightness: {{ hallway['brightness'] }}</span>
+              <img id = "hallwaylightimg" onclick="toggleLight('hallway')" class="small-img"
+              src="{% if hallway['light'] %}
+              {{ url_for('static', filename='light-bulb-on.png') }}
+              {% else %}
+              {{ url_for('static', filename='light-bulb.png') }}
+              {% endif %}" />
+          <span class = "temp" id = "hallwayTemp">Temp: {{ hallway['temp'] }}</span>
+          <span id = "hallwayBrightness">Brightness: {{ hallway['brightness'] }}</span>
           </div>
           <div class= "room-info" style="left: 1200px; top: 400px">
-              <a href="/bedroom/light/toggle"><img class="small-img"
-                                                    src="{% if bedroom['light'] %}
-                                                    {{ url_for('static', filename='light-bulb-on.png') }}
-                                                    {% else %}
-                                                    {{ url_for('static', filename='light-bulb.png') }}
-                                                    {% endif %}" /></a>
-          <span>Temp: {{ bedroom['temp'] }}</span>
-          <span>Brightness: {{ bedroom['brightness'] }}</span>
+              <img id = "bedroomlightimg" onclick="toggleLight('bedroom')" class="small-img"
+              src="{% if bedroom['light'] %}
+              {{ url_for('static', filename='light-bulb-on.png') }}
+              {% else %}
+              {{ url_for('static', filename='light-bulb.png') }}
+              {% endif %}" />
+          <span class = "temp" id = "bedroomTemp">Temp: {{ bedroom['temp'] }}</span>
+          <span id = "bedroomBrightness">Brightness: {{ bedroom['brightness'] }}</span>
           </div>
           <div class= "room-info" style="left: 600px; top: 300px">
-              <a href="/balcony/light/toggle"><img class="small-img"
-                                                    src="{% if balcony['light'] %}
-                                                    {{ url_for('static', filename='light-bulb-on.png') }}
-                                                    {% else %}
-                                                    {{ url_for('static', filename='light-bulb.png') }}
-                                                    {% endif %}" /></a>
-          <span>Temp: {{ balcony['temp'] }}</span>
-          <span>Brightness: {{ balcony['brightness'] }}</span>
+              <img id = "balconylightimg" onclick="toggleLight('balcony')" class="small-img"
+              src="{% if balcony['light'] %}
+              {{ url_for('static', filename='light-bulb-on.png') }}
+              {% else %}
+              {{ url_for('static', filename='light-bulb.png') }}
+              {% endif %}" />
+          <span class = "temp" id = "balconyTemp">Temp: {{ balcony['temp'] }}</span>
+          <span id = "balconyBrightness">Brightness: {{ balcony['brightness'] }}</span>
           </div>
 
       </div>
     <div class="forms">
-        <form action="/kitchen/light/brightness" method="post">
+        <div class="form">
             <span>
                 <label>Kitchen brightness</label>
-                <input type="number" name="brightness"/>
+                <input type="number" id="kitchenbrightnessfield"/>
             </span>
             <span>
-                <button type="submit">Change brightness</button>
+                <button onclick="changeBrightness('kitchen')">Change brightness</button>
             </span>
-        </form>
-        <form action="/bathroom/light/brightness" method="post">
+        </div>
+        <div class="form">
             <span>
                 <label>Bathroom brightness</label>
-                <input type="number" name="brightness"/>
+                <input type="number" id="bathroombrightnessfield"/>
             </span>
             <span>
-                <button type="submit">Change brightness</button>
+                <button onclick="changeBrightness('bathroom')">Change brightness</button>
             </span>
-        </form>
-        <form action="/hallway/light/brightness" method="post">
+        </div>
+        <div class="form">
             <span>
                 <label>Hallway brightness</label>
-                <input type="number" name="brightness"/>
+                <input type="number" id="hallwaybrightnessfield"/>
             </span>
             <span>
-                <button type="submit">Change brightness</button>
+                <button onclick="changeBrightness('hallway')">Change brightness</button>
             </span>
-        </form>
-        <form action="/bedroom/light/brightness" method="post">
+        </div>
+                <div class="form">
             <span>
                 <label>Bedroom brightness</label>
-                <input type="number" name="brightness"/>
+                <input type="number" id="bedroombrightnessfield"/>
             </span>
             <span>
-                <button type="submit">Change brightness</button>
+                <button onclick="changeBrightness('bedroom')">Change brightness</button>
             </span>
-        </form>
-        <form action="/balcony/light/brightness" method="post">
+        </div>
+        <div class="form">
             <span>
                 <label>Balcony brightness</label>
-                <input type="number" name="brightness"/>
+                <input type="number" id="balconybrightnessfield"/>
             </span>
             <span>
-                <button type="submit">Change brightness</button>
+                <button onclick="changeBrightness('balcony')">Change brightness</button>
             </span>
-        </form>
+        </div>
 
     </div>
-  
+    <script>setInterval(toggleTemp, 5000);</script>
 </body>
 </html>
